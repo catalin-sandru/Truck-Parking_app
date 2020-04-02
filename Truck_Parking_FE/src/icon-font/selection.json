@@ -1,0 +1,97 @@
+{
+  "IcoMoonType": "selection",
+  "icons": [{
+    "icon": {
+      "paths": ["M1024 590.444l-512-397.426-512 397.428v-162.038l512-397.426 512 397.428zM896 576v384h-256v-256h-256v256h-256v-384l384-288z"],
+      "tags": ["home", "house"],
+      "defaultCode": 59648,
+      "grid": 16,
+      "attrs": []
+    },
+    "attrs": [],
+    "properties": {
+      "ligatures": "home, house",
+      "name": "home",
+      "order": 3,
+      "id": 1,
+      "prevSize": 32,
+      "code": 59648
+    },
+    "setIdx": 0,
+    "setId": 1,
+    "iconIdx": 0
+  }, {
+    "icon": {
+      "paths": ["M672 192l-320-128-352 128v768l352-128 320 128 352-128v-768l-352 128zM384 145.73l256 102.4v630.138l-256-102.398v-630.14zM64 236.828l256-93.090v631.8l-256 93.088v-631.798zM960 787.172l-256 93.092v-631.8l256-93.090v631.798z"],
+      "tags": ["map", "guide"],
+      "defaultCode": 59724,
+      "grid": 16,
+      "attrs": []
+    },
+    "attrs": [],
+    "properties": {
+      "ligatures": "map2, guide2",
+      "name": "map2",
+      "order": 4,
+      "id": 77,
+      "prevSize": 32,
+      "code": 59724
+    },
+    "setIdx": 0,
+    "setId": 1,
+    "iconIdx": 76
+  }, {
+    "icon": {
+      "paths": ["M1024 397.050l-353.78-51.408-158.22-320.582-158.216 320.582-353.784 51.408 256 249.538-60.432 352.352 316.432-166.358 316.432 166.358-60.434-352.352 256.002-249.538zM512 753.498l-223.462 117.48 42.676-248.83-180.786-176.222 249.84-36.304 111.732-226.396 111.736 226.396 249.836 36.304-180.788 176.222 42.678 248.83-223.462-117.48z"],
+      "tags": ["star-empty", "rate", "star", "favorite", "bookmark"],
+      "defaultCode": 59863,
+      "grid": 16,
+      "attrs": []
+    },
+    "attrs": [],
+    "properties": {
+      "ligatures": "star-empty, rate",
+      "name": "star-empty",
+      "order": 5,
+      "id": 216,
+      "prevSize": 32,
+      "code": 59863
+    },
+    "setIdx": 0,
+    "setId": 1,
+    "iconIdx": 215
+  }],
+  "height": 1024,
+  "metadata": {
+    "name": "icomoon"
+  },
+  "preferences": {
+    "showGlyphs": true,
+    "showQuickUse": true,
+    "showQuickUse2": true,
+    "showSVGs": true,
+    "fontPref": {
+      "prefix": "icon-",
+      "metadata": {
+        "fontFamily": "icomoon"
+      },
+      "metrics": {
+        "emSize": 1024,
+        "baseline": 6.25,
+        "whitespace": 50
+      },
+      "embed": false
+    },
+    "imagePref": {
+      "prefix": "icon-",
+      "png": true,
+      "useClassSelector": true,
+      "color": 0,
+      "bgColor": 16777215,
+      "classSelector": ".icon"
+    },
+    "historySize": 50,
+    "showCodes": true,
+    "gridSize": 16
+  }
+}
