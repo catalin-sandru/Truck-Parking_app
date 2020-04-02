@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Region from '../../components/region/region.component';
+import { HomeStyle } from './home.style';
 
 const Home = () => {
 
@@ -13,20 +14,18 @@ const Home = () => {
   }, [])
 
   return(
-    <div>
+    <HomeStyle>
       <h1 className="page-title">Stop and rest</h1>
-      <div className="country-list">
-        <ul>
-        {regions.map(r => {
-          return(
-            <li>
-              <Region name={r.name}/>
-            </li>
-          )
-        })}
-        </ul>
-      </div>
-    </div>
+      <ul className="region-list">
+      {regions.map(r => {
+        return(
+          <li key={r._id} className="region-list__item">
+            <Region name={r.name} />
+          </li>
+        )
+      })}
+      </ul>
+    </HomeStyle>
   )
 }
 

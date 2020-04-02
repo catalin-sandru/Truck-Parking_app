@@ -20,13 +20,8 @@ const Navbar = () => {
           </li>
           {!isLoggedIn ? 
           <li className="navbar-list__item">
-            {/* <span > */}
-              <Link to="/login" className="navbar-list__link">Login</Link>
-            {/* </span> */}
-            
-            {/* <span className="navbar-list__link"> */}
-              <Link to="/register" className="navbar-list__link">Register</Link>
-            {/* </span> */}
+            <Link to="/login" className="navbar-list__link">Login</Link>
+            <Link to="/register" className="navbar-list__link">Register</Link>
           </li>
           :
           <li className="navbar-list__item">
