@@ -3,14 +3,12 @@ const Region = require('../model/regionModel');
 exports.getAllRegions = async (req, res, next) => {
   try {
     const regions = await Region.find({});
-    // console.log(regions)
     res.status(200).json({
       message: 'Region fetched succesfully',
       regions
     })
   } catch(err) {
     next(err);
-    console.log(err)
   }
 }
 
