@@ -20,6 +20,14 @@ app.use((req, res, next) => {
 
 app.use(ParkingRouter);
 
+app.use((error, req, res, next) => {
+  console.log(error);
+  const status = error.statusCode;
+  const message = error.message;
+  const data = error.data;
+  res.status(status).json({message, data});
+})
+
 mongoose.connect(mongodb_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true
