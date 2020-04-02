@@ -9,7 +9,7 @@ const App = () => {
   return (
     <Provider store={store}>
       <div className="App">
-        <Navbar/>
+        <Navbar />
       </div>
     </Provider>
   );
