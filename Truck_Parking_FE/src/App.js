@@ -5,7 +5,7 @@ import './App.css';
 import Navbar from './components/navbar/navbar.component';
 import Home from './pages/home/home.component';
 import Login from './components/auth/login.component';
-import Region from './components/region/Region.component';
+import Region from './pages/region/RegionComponent/Region.component';
 
 function App() {
   return (
