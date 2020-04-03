@@ -1,17 +1,23 @@
 import React from 'react';
-import { Provider } from 'react-redux';
+import { Route, Switch } from 'react-router-dom';
 
 import './App.css';
 import Navbar from './components/navbar/navbar.component';
-import store from './redux/store';
+import Home from './pages/home/home.component';
+import Login from './components/auth/login.component';
+import Region from './components/region/Region.component';
 
-const App = () => {
+function App() {
   return (
-    <Provider store={store}>
-      <div className="App">
-        <Navbar />
-      </div>
-    </Provider>
+    <div className="App">
+      <Navbar />
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route path="/login" component={Login} />
+        <Route path="/register" component={Login} />
+        <Route path="/region/:id" component={Region} />
+      </Switch>
+    </div>
   );
 }
 
