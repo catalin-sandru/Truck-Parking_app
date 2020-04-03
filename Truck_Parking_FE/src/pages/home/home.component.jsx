@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { HomeStyle } from './home.style';
-import RegionLink from '../../components/region/regionLink.component';
+import RegionLink from '../region/RegionLink/regionLink.component';
 
 const Home = () => {
 
