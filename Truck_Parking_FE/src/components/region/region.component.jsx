@@ -1,12 +1,12 @@
 import React from 'react';
-import { BrowserRouter as Router, Link } from 'react-router-dom';
 
-const Region = ({name}) => {
+const Region = ({ match }) => {
+  console.log(match)
   return(
-    <Router>
-      <Link to={name.toLowerCase()} >{name}</Link>
-    </Router>
+    <div>
+      region component
+    </div>
   )
-};
+}
 
 export default Region;

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Region from '../../components/region/region.component';
 import { HomeStyle } from './home.style';
+import RegionLink from '../../components/region/regionLink.component';
 
 const Home = () => {
 
@@ -16,15 +16,11 @@ const Home = () => {
   return(
     <HomeStyle>
       <h1 className="page-title">Stop and rest</h1>
-      <ul className="region-list">
-      {regions.map(r => {
-        return(
-          <li key={r._id} className="region-list__item">
-            <Region name={r.name} />
-          </li>
-        )
-      })}
-      </ul>
+      <div className="region-list">
+      {regions.map(r => (
+        <RegionLink name={r.name} id={r._id} key={r._id}/>
+      ))}
+      </div>
     </HomeStyle>
   )
 }
