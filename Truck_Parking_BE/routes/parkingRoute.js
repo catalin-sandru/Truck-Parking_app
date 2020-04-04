@@ -7,6 +7,6 @@ const router = express.Router();
 router.get('/', ParkingController.getAllRegions);
 
 router.post('/add-region', ParkingController.addRegion);
-router.post('/add-parking', ParkingController.addParkingSpot);
+router.post('/region/:id', ParkingController.addParkingSpot);
 
 module.exports = router;

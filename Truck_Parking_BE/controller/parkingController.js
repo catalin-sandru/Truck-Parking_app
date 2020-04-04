@@ -25,13 +25,13 @@ exports.addRegion = async (req, res, next) => {
   })
 }
 
-exports.addParkingSpot = (req, res, next) => {
-  const name = req.body.name;
-  const lat = req.body.lat;
-  const lon = req.body.lon;
-  // create post in the databade
-  res.status(201).json({
-    message: 'Parking added successfully',
-    parkingSpot: { id: new Date().toISOString(), name, lat, lon}
+exports.addParkingSpot = async (req, res, next) => {
+  const regionId = req.params.id;
+
+  const region = await Region.findById(regionId);
+  // const parkingItem = await
+  console.log()
+  res.json({
+    regionId
   })
 }
