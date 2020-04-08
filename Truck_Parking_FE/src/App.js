@@ -6,6 +6,7 @@ import Navbar from './components/navbar/navbar.component';
 import Home from './pages/home/home.component';
 import Login from './components/auth/login.component';
 import Region from './pages/region/RegionComponent/Region.component';
+import Modal from './components/modal/Modal.component';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/register" component={Login} />
         <Route path="/region/:id" component={Region} />
       </Switch>
+      <Modal/>
     </div>
   );
 }
