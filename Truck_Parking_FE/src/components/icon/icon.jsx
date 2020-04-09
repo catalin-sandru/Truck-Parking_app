@@ -1,10 +1,10 @@
 import React from 'react';
-import IcoMoon from 'react-icomoon';
 
-const iconSet = require('./icon-font/selection.json');
+const Icon = ({ path }) => {
+  return(
+    <img src={path}/>
+  )
 
-const Icon = ({...props}) => {
-  return <IcoMoon iconSet={iconSet} {...props} />
 }
 
 export default Icon;
