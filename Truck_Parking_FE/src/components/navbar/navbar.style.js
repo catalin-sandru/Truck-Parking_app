@@ -16,5 +16,10 @@ export const NavbarStyle = styled.div`
 
   .navbar-list__link {
     margin: 0.5rem;
+
+    img{
+      width: 2.5rem;
+      height: 2.5rem;
+    }
   }
 `

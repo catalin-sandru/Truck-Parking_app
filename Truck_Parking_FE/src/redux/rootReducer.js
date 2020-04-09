@@ -1,5 +1,7 @@
 import {combineReducers} from 'redux';
 
-export default combineReducers({
+import ModalReducer from './reducers/modal.reducer';
 
+export default combineReducers({
+  ModalReducer
 })
