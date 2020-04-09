@@ -12,7 +12,7 @@ const Navbar = () => {
       <ul className="navbar-list">
         <li className="navbar-list__item">
           <Link to="/" className="navbar-list__link">
-            <Icon icon="home" size={30} color="#000" />  
+            <Icon name="home" /> 
           </Link>
         </li>
         {!isLoggedIn ? 

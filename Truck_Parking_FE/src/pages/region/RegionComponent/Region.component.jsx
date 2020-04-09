@@ -2,7 +2,6 @@ import React from 'react';
 import ParkingSpot from '../../../components/parking_spot/parkingSpot.component';
 
 const Region = ({ match }) => {
-  console.log(match)
   return(
     <div>
       <header>
