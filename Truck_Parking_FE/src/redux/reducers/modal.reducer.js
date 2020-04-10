@@ -16,6 +16,10 @@ export default function(state = modalState, action) {
         facilities: setFacility
       }
 
+    case "SetInfo":
+      action.e.preventDefault();
+      console.log(action.formInfo)
+      return
     default:
         return state
   }

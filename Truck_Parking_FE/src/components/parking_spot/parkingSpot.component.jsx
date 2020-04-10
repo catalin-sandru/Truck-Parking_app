@@ -1,14 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { ParkingSpotStyle } from './parkingSpot.style';
 
 const ParkingSpot = () => {
-
-  const [facilities, setFacilities] = useState({
-    parking: false,
-    shower: false,
-    washingMachine: false,
-    restaurant: false,
-  })
 
   return(
     <ParkingSpotStyle>
