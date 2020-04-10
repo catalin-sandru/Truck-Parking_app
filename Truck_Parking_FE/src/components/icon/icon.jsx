@@ -9,7 +9,7 @@ const Icon = ({ name }) => {
   const getIcon = iconSet.find(i => i.name === name);
   
   return(
-    <img src={getIcon.path} />
+    <img src={getIcon.path} alt={getIcon.name} />
   )
 }
 

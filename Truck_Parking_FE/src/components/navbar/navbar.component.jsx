@@ -5,7 +5,7 @@ import Icon from '../icon/icon';
 
 const Navbar = () => {
 
-  const [isLoggedIn, setIsLoggedIn ] = useState(false);
+  const [isLoggedIn ] = useState(false);
 
   return (
     <NavbarStyle>
