@@ -1,8 +1,12 @@
 const mongoose = require('mongoose');
 
-const Schema = mongoose.Schema();
+const Schema = mongoose.Schema;
 
 const ParkingModel = new Schema({
+  title: {
+    type: String,
+    required: true
+  },
   coordonates: {
     type: String,
     required: true
@@ -10,7 +14,7 @@ const ParkingModel = new Schema({
   facilities: {
     type: Array
   },
-  description: {
+  extra_info: {
     type: String
   }
 })
