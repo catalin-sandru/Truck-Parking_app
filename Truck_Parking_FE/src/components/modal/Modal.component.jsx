@@ -25,8 +25,7 @@ const Modal = ({ setInfo, setIcon }) => {
     })
   }
 
-  // const state = [...inputValues, ...facilities]
-
+  
   const onClick = e => {
     const { name, checked } = e.target;
     // console.log(state)
@@ -35,10 +34,11 @@ const Modal = ({ setInfo, setIcon }) => {
       [name]: checked
     })
   }
-
+  
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(inputValues, facilities)
+    const formValues = {...inputValues, facilities}
+    console.log(formValues)
   }
 
   return(
