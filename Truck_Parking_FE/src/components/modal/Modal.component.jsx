@@ -47,6 +47,9 @@ const Modal = ({ setInfo, setIcon }) => {
         <label htmlFor="title">Add short title</label>
         <input type="text" id="title" name="title" placeholder="Insert title" onChange={onChange} />
 
+        <label htmlFor="coordinates">Add coordinates</label>
+        <input type="text" id="coordinates" name="coordinates" placeholder="Insert coordinates" onChange={onChange} />
+
         {iconSet.map(i => (
           <label htmlFor={i.name} key={i.name}>
             <Icon name={i.name} />
