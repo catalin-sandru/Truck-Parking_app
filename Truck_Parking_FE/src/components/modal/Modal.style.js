@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 
 export const ModalStyle = styled.div`
+  display: ${props => props.isOpen ? "block" : "none" };
+
   form {
     display: inline-flex;
     flex-direction: column;

@@ -42,7 +42,7 @@ const Modal = ({ setInfo, setIcon }) => {
   }
 
   return(
-    <ModalStyle>
+    <ModalStyle isOpen={true}>
       <form action="" onSubmit={onSubmit}>
         <label htmlFor="title">Add short title</label>
         <input type="text" id="title" name="title" placeholder="Insert title" onChange={onChange} />
