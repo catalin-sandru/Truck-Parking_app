@@ -34,12 +34,10 @@ export const ModalStyle = styled.div`
       display: flex;
       flex-direction: column;
       margin-bottom: 1.2rem;
-
       label {
         font-weight: bold;
         margin-bottom: 0.5rem;
       }
-
       input {
         padding: 0.3rem;
       }
@@ -47,10 +45,15 @@ export const ModalStyle = styled.div`
 
     .form__icons {
       display: grid;
-      grid-template-columns: repeat(2, auto);
-
+      grid-template-columns: repeat(3, auto);
       label {
         margin: auto;
+      }
+      img {
+        transition: linear 0.3s;
+      }
+      input:checked + img {
+        transform: scale(1.2);
       }
     }
 
@@ -59,10 +62,6 @@ export const ModalStyle = styled.div`
         width: 100%;
         padding: 0.6rem 0;
       }
-    }
-
-    input[type="checkbox"] {
-      display: none;
     }
 
     input[type="text"],

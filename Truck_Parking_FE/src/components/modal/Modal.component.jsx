@@ -59,8 +59,8 @@ const Modal = ({ isOpen, closeModal }) => {
         <div className="form__icons">
           {iconSet.map(i => (
             <label htmlFor={i.name} key={i.name}>
-              <Icon name={i.name} />
               <input type="checkbox" id={i.name} name={i.name} onClick={onClick} />
+              <Icon name={i.name} />
             </label>
           ))}
         </div>
