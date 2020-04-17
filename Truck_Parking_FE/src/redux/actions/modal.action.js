@@ -1,10 +1,9 @@
-export const setIconAction = event => ({
-  type: "SelectFacility",
-  event
+import { OpenModal, CloseModal } from '../constants'
+
+export const CloseModalAction = () => ({
+  type: CloseModal
 })
 
-export const setInfoAction = (e, formInfo) => ({
-  type: "SetInfo",
-  e,
-  formInfo
+export const OpenModalAction = () => ({
+  type: OpenModal
 })
