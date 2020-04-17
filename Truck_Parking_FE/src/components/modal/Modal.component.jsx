@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 
 import { ModalStyle } from './Modal.style';
 import Icon from '../icon/icon';
-import { setIconAction, setInfoAction } from '../../redux/actions/modal.action';
 import iconSet from '../icon/icon-font/facility_icon';
+import { CloseModalAction } from '../../redux/actions/modal.action';
 
 
-const Modal = ({ setInfo, setIcon }) => {
+const Modal = ({ isOpen, closeModal }) => {
 
   const [inputValues, setInputValues ] = useState({
     title: "",
@@ -28,7 +28,6 @@ const Modal = ({ setInfo, setIcon }) => {
   
   const onClick = e => {
     const { name, checked } = e.target;
-    // console.log(state)
     return setFacilities({
       ...facilities,
       [name]: checked
@@ -42,37 +41,48 @@ const Modal = ({ setInfo, setIcon }) => {
   }
 
   return(
-    <ModalStyle isOpen={true}>
+    <ModalStyle isOpen={isOpen}>
       <form action="" onSubmit={onSubmit}>
-        <label htmlFor="title">Add short title</label>
-        <input type="text" id="title" name="title" placeholder="Insert title" onChange={onChange} />
+        <div className="form__button-close">
+          <button onClick={closeModal}>&#10008;</button>
+        </div>
+        <div className="form__title">
+          <label htmlFor="title">Add short title</label>
+          <input type="text" id="title" name="title" placeholder="Insert title" onChange={onChange} />
+        </div>
 
-        <label htmlFor="coordinates">Add coordinates</label>
-        <input type="text" id="coordinates" name="coordinates" placeholder="Insert coordinates" onChange={onChange} />
+        <div className="form__coordinates">
+          <label htmlFor="coordinates">Add coordinates</label>
+          <input type="text" id="coordinates" name="coordinates" placeholder="Insert coordinates" onChange={onChange} />
+        </div>
 
-        {iconSet.map(i => (
-          <label htmlFor={i.name} key={i.name}>
-            <Icon name={i.name} />
-            {/* <input type="checkbox" id={i.name} name={i.name} onClick={e => setIcon(e)} /> */}
-            <input type="checkbox" id={i.name} name={i.name} onClick={onClick} />
-          </label>
-        ))}
-
-        <label htmlFor="extra_info">Add extra information</label>
-        <input type="textarea" id="extra_info" name="extra_info" onChange={onChange}/>
-
-        <button type="submit">Submit</button>
+        <div className="form__icons">
+          {iconSet.map(i => (
+            <label htmlFor={i.name} key={i.name}>
+              <input type="checkbox" id={i.name} name={i.name} onClick={onClick} />
+              <Icon name={i.name} />
+            </label>
+          ))}
+        </div>
+        
+        <div className="form__textarea">
+          <label htmlFor="extra_info">Add extra information</label>
+          <input type="textarea" id="extra_info" name="extra_info" onChange={onChange}/>
+        </div>
+        
+        <div className="form__button-submit">
+          <button type="submit">Submit</button>
+        </div>
       </form>
     </ModalStyle>
   )
 }
 
-const mapStateToProps = state => (console.log(state), {
-  state: state.ModalReducer,
+const mapStateToProps = state => ({
+  isOpen: state.ModalReducer,
 });
 const mapDispachToProps = dispach => ({
-  setIcon: e => dispach(setIconAction(e)),
-  setInfo: (e, formInfo) => dispach(setInfoAction(e, formInfo))
+  closeModal: () => dispach(CloseModalAction())
 })
 
 export default connect(mapStateToProps, mapDispachToProps)(Modal);

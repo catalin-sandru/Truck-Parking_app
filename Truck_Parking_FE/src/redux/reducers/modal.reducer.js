@@ -1,25 +1,12 @@
-const modalState = {
-  title: "",
-  extra_info: "",
-  facilities: {}
-}
+import { OpenModal, CloseModal } from '../constants';
 
-export default function(state = modalState, action) {
+
+export default function(state = false, action) {
   switch(action.type) {
-    case "SelectFacility":
-      action.event.persist();
-      const { name, checked } = action.event.target;
-      const newSelected = { [name]: checked };
-      const setFacility = Object.assign(state.facilities, newSelected);
-      return {
-        ...state,
-        facilities: setFacility
-      }
-
-    case "SetInfo":
-      action.e.preventDefault();
-      console.log(action.formInfo)
-      return
+    case OpenModal:
+      return state = true;
+    case CloseModal:
+      return state = false;
     default:
         return state
   }

@@ -1,21 +1,29 @@
 import React from 'react';
 import ParkingSpot from '../../../components/parking_spot/parkingSpot.component';
+import { OpenModalAction } from '../../../redux/actions/modal.action';
+import { connect } from 'react-redux';
 
-const Region = ({ match }) => {
-
-  const toggleModal = () => {
-    
-  }
+const Region = ({ openModal }) => {
 
   return(
     <div>
       <header>
         <h1>Find your parking spot</h1>
-        <button onClick={toggleModal}>Add New Parking Spot</button>
+        <button onClick={openModal}>Add New Parking Spot</button>
       </header>
       <ParkingSpot />
     </div>
   )
 }
 
-export default Region;
+
+// const mapStateToProps = state => ({
+//   state: state.ModalReducer
+// })
+
+
+const mapDispachToProps = dispach => ({
+  openModal: () => dispach(OpenModalAction())
+})
+
+export default connect(null, mapDispachToProps)(Region);
