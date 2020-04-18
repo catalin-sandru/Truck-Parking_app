@@ -37,6 +37,10 @@ export const ModalStyle = styled.div`
       label {
         font-weight: bold;
         margin-bottom: 0.5rem;
+        span {
+          font-weight: normal;
+          font-size: 0.7rem;
+        }
       }
       input {
         padding: 0.3rem;

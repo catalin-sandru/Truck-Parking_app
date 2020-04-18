@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import Cleave from 'cleave.js/react';
 
 import { ModalStyle } from './Modal.style';
 import Icon from '../icon/icon';
@@ -9,51 +10,78 @@ import { CloseModalAction } from '../../redux/actions/modal.action';
 
 const Modal = ({ isOpen, closeModal }) => {
 
-  const [inputValues, setInputValues ] = useState({
-    title: "",
-    extra_info: "",
-  })
+  const [inputValues, setInputValues ] = useState({});
 
-  const [ facilities, setFacilities ] = useState({})
+  const [ getFacilities, setFacilities ] = useState({});
+
+  // const validateInputs = (value, min, max) => {
+  //   if(value.length < min && value.length > max) {
+  //     return false
+  //   } else {
+  //     return true
+  //   }
+  // }
 
   const onChange = e => {
     e.preventDefault();
     const { value, name } = e.target;
+    // validateInputs(value, 3, 8)
     return setInputValues({
       ...inputValues,
       [name]: value
     })
   }
 
-  
   const onClick = e => {
     const { name, checked } = e.target;
     return setFacilities({
-      ...facilities,
+      ...getFacilities,
       [name]: checked
     })
   }
   
   const onSubmit = (e) => {
     e.preventDefault();
+    const facilities = {};
+    Object.keys(getFacilities).forEach(item => {
+      if(getFacilities[item] !== false) {
+        facilities[item] = getFacilities[item]
+        return facilities
+      }
+    })
+
     const formValues = {...inputValues, facilities}
     console.log(formValues)
   }
 
   return(
-    <ModalStyle isOpen={isOpen}>
+    <ModalStyle isOpen={isOpen} >
       <form action="" onSubmit={onSubmit}>
         <div className="form__button-close">
           <button onClick={closeModal}>&#10008;</button>
         </div>
         <div className="form__title">
           <label htmlFor="title">Add short title</label>
-          <input type="text" id="title" name="title" placeholder="Insert title" onChange={onChange} />
+          <input type="text" id="title" name="title" placeholder="Insert title" onChange={onChange} minLength="3" maxLength="8"/>
         </div>
 
         <div className="form__coordinates">
-          <label htmlFor="coordinates">Add coordinates</label>
-          <input type="text" id="coordinates" name="coordinates" placeholder="Insert coordinates" onChange={onChange} />
+          <label htmlFor="coordinates">Add coordinates
+          <br/>
+            <span> Enter numbers only. Special characters will be added automatically</span>
+          </label>
+          {/* <input type="text" id="coordinates" name="coordinates" placeholder="Insert coordinates" onChange={onChange}/> */}
+          <Cleave
+            placeholder="00&#xb0;00&#x2019;00.0&#x201D;N 00&#xb0;00&#x2019;00.0&#x201D;W"
+            onChange={onChange} 
+            name="coordinates" 
+            options={{
+              delimiters: ['°', '\'', '.', '"N ', '°', '\'', '.', '"W', ],
+              blocks: [2, 2, 2, 1, 2, 2, 2, 1, 0],
+              numericOnly: true,
+              uppercase: true
+              }}
+          />
         </div>
 
         <div className="form__icons">
