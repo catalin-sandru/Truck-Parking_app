@@ -6,6 +6,7 @@ import { ModalStyle } from './Modal.style';
 import Icon from '../icon/icon';
 import iconSet from '../icon/icon-font/facility_icon';
 import { CloseModalAction } from '../../redux/actions/modal.action';
+import Axios from 'axios';
 
 
 const Modal = ({ isOpen, closeModal }) => {
@@ -41,7 +42,17 @@ const Modal = ({ isOpen, closeModal }) => {
       }
     })
 
-    const formValues = {...inputValues, facilities}
+    const formValues = {...inputValues, facilities};
+    console.log(formValues)
+    Axios.post('http://localhost:5000' + window.location.pathname, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: formValues
+    })
+      .then(res => console.log(res))
+      .catch(err => console.log(err))
   }
 
   return(
@@ -65,7 +76,7 @@ const Modal = ({ isOpen, closeModal }) => {
             required
             placeholder="00&#xb0;00&#x2019;00.0&#x201D;N 00&#xb0;00&#x2019;00.0&#x201D;W"
             onChange={onChange} 
-            name="coordinates" 
+            name="coordonates" 
             options={{
               delimiters: ['°', '\'', '.', '"N ', '°', '\'', '.', '"E'],
               blocks: [2, 2, 2, 1, 2, 2, 2, 1, 0],
