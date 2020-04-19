@@ -14,18 +14,9 @@ const Modal = ({ isOpen, closeModal }) => {
 
   const [ getFacilities, setFacilities ] = useState({});
 
-  // const validateInputs = (value, min, max) => {
-  //   if(value.length < min && value.length > max) {
-  //     return false
-  //   } else {
-  //     return true
-  //   }
-  // }
-
   const onChange = e => {
     e.preventDefault();
     const { value, name } = e.target;
-    // validateInputs(value, 3, 8)
     return setInputValues({
       ...inputValues,
       [name]: value
@@ -51,7 +42,6 @@ const Modal = ({ isOpen, closeModal }) => {
     })
 
     const formValues = {...inputValues, facilities}
-    console.log(formValues)
   }
 
   return(
@@ -62,7 +52,7 @@ const Modal = ({ isOpen, closeModal }) => {
         </div>
         <div className="form__title">
           <label htmlFor="title">Add short title</label>
-          <input type="text" id="title" name="title" placeholder="Insert title" onChange={onChange} minLength="3" maxLength="8"/>
+          <input type="text" id="title" name="title" placeholder="Insert title" onChange={onChange} minLength="3" maxLength="8" required/>
         </div>
 
         <div className="form__coordinates">
@@ -72,11 +62,12 @@ const Modal = ({ isOpen, closeModal }) => {
           </label>
           {/* <input type="text" id="coordinates" name="coordinates" placeholder="Insert coordinates" onChange={onChange}/> */}
           <Cleave
+            required
             placeholder="00&#xb0;00&#x2019;00.0&#x201D;N 00&#xb0;00&#x2019;00.0&#x201D;W"
             onChange={onChange} 
             name="coordinates" 
             options={{
-              delimiters: ['°', '\'', '.', '"N ', '°', '\'', '.', '"W', ],
+              delimiters: ['°', '\'', '.', '"N ', '°', '\'', '.', '"E'],
               blocks: [2, 2, 2, 1, 2, 2, 2, 1, 0],
               numericOnly: true,
               uppercase: true
@@ -113,4 +104,4 @@ const mapDispachToProps = dispach => ({
   closeModal: () => dispach(CloseModalAction())
 })
 
-export default connect(mapStateToProps, mapDispachToProps)(Modal);
+export default connect(mapStateToProps, mapDispachToProps)(Modal); 
