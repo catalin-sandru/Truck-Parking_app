@@ -1,3 +1,5 @@
+const { validationResult } = require('express-validator');
+
 const Region = require('../model/regionModel');
 const Parking = require('../model/parkingModel');
 
@@ -29,6 +31,12 @@ exports.addRegion = async (req, res, next) => {
 exports.addParkingSpot = async (req, res, next) => {
   const regionId = req.params.id;
   const { title, extra_info, facilities, coordonates } = req.body;
+
+  const errors = validationResult(req);
+  console.log(errors)
+  if(!errors.isEmpty()) {
+    return res.status(422).json({message: errors})
+  }
 
   const region = await Region.findById(regionId).populate('creator');
   if(!region) {
