@@ -8,7 +8,7 @@ import Icon from '../icon/icon';
 import iconSet from '../icon/icon-font/facility_icon';
 import { CloseModalAction } from '../../redux/actions/modal.action';
 
-const facilities = [];
+const initFacilities = [];
 
 const onClick = (state, action) => {
   const { name, type } = action
@@ -27,7 +27,7 @@ const Modal = ({ isOpen, closeModal }) => {
 
   const [inputValues, setInputValues ] = useState({});
   
-  const [ setFacilities, dispach ] = useReducer(onClick, facilities);
+  const [ facilities, dispach ] = useReducer(onClick, initFacilities);
 
   const onChange = e => {
     e.preventDefault();
@@ -41,13 +41,11 @@ const Modal = ({ isOpen, closeModal }) => {
   
   const onSubmit = (e) => {
     e.preventDefault();
-    const formValues = {...inputValues, setFacilities};
+    const formValues = {...inputValues, facilities};
 
     axios.post('http://localhost:5000' + window.location.pathname, formValues)
       .then(res => {
-        if(res.status = 200) {
-          return closeModal();
-        }
+        return closeModal();
       })
       .catch(err => console.log(err))
   }
@@ -86,6 +84,7 @@ const Modal = ({ isOpen, closeModal }) => {
         <div className="form__icons">
           {iconSet.map(i => (
             <label htmlFor={i.name} key={i.name}>
+              <p>{i.name}</p>
               <input type="checkbox" id={i.name} name={i.name} onClick={(e) => {dispach({type: e.target.checked, name: e.target.name})}} />
               <Icon name={i.name} />
             </label>
