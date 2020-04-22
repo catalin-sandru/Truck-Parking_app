@@ -14,10 +14,10 @@ router.post('/region/:id', [
     .trim()
     .isString()
     .isLength({min: 3, max:150}),
-  body('coordonates')
+  body('coordinates')
     .trim()
     .isString()
-    .isLength(25).withMessage('Coordonates must have 24 charachters')
+    .isLength(25).withMessage('Coordinates must have 24 charachters')
     .matches(regEx),
   body('facilities')
     .not()
