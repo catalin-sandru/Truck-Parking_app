@@ -30,7 +30,7 @@ exports.addRegion = async (req, res, next) => {
 
 exports.addParkingSpot = async (req, res, next) => {
   const regionId = req.params.id;
-  const { title, extra_info, facilities, coordonates } = req.body;
+  const { title, extra_info, facilities, coordinates } = req.body;
 
   const errors = validationResult(req);
   console.log(errors)
@@ -47,7 +47,7 @@ exports.addParkingSpot = async (req, res, next) => {
 
   try {
     const parking = new Parking({
-      title, extra_info, facilities, coordonates
+      title, extra_info, facilities, coordinates
     })
     await parking.save();
     region.parkingItems.push(parking._id)
