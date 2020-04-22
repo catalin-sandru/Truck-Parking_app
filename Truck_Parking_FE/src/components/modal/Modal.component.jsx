@@ -1,19 +1,33 @@
-import React, { useState } from 'react';
+import React, { useState, useReducer } from 'react';
 import { connect } from 'react-redux';
 import Cleave from 'cleave.js/react';
+import axios from 'axios';
 
 import { ModalStyle } from './Modal.style';
 import Icon from '../icon/icon';
 import iconSet from '../icon/icon-font/facility_icon';
 import { CloseModalAction } from '../../redux/actions/modal.action';
-import axios from 'axios';
 
+const facilities = [];
+
+const onClick = (state, action) => {
+  const { name, type } = action
+  switch(type) {
+    case true:
+      return state.concat([name]);
+    case false:
+      const newState = state.filter(f => f !== name);
+      return state = newState;
+    default:
+      return state
+  }
+}
 
 const Modal = ({ isOpen, closeModal }) => {
 
   const [inputValues, setInputValues ] = useState({});
-
-  const [ getFacilities, setFacilities ] = useState({});
+  
+  const [ setFacilities, dispach ] = useReducer(onClick, facilities);
 
   const onChange = e => {
     e.preventDefault();
@@ -24,30 +38,16 @@ const Modal = ({ isOpen, closeModal }) => {
     })
   }
 
-  const onClick = e => {
-    const { name, checked } = e.target;
-    return setFacilities({
-      ...getFacilities,
-      [name]: checked
-    })
-  }
   
   const onSubmit = (e) => {
     e.preventDefault();
-    const facilities = {};
-    Object.keys(getFacilities).forEach(item => {
-      if(getFacilities[item] !== false) {
-        facilities[item] = getFacilities[item]
-        return facilities
-      }
-    })
+    const formValues = {...inputValues, setFacilities};
 
-    const formValues = {...inputValues, facilities};
-    console.log(formValues)
     axios.post('http://localhost:5000' + window.location.pathname, formValues)
       .then(res => {
-        console.log(res)
-        if(res.status = 200) return closeModal();
+        if(res.status = 200) {
+          return closeModal();
+        }
       })
       .catch(err => console.log(err))
   }
@@ -60,19 +60,20 @@ const Modal = ({ isOpen, closeModal }) => {
         </div>
         <div className="form__title">
           <label htmlFor="title">Add short title</label>
-          <input type="text" id="title" name="title" placeholder="Insert title" onChange={onChange} minLength="3" maxLength="8" required/>
+          <input type="text" id="title" name="title" placeholder="Insert title" onChange={onChange} minLength="3" maxLength="150" required/>
         </div>
 
         <div className="form__coordinates">
           <label htmlFor="coordinates">Add coordinates
           <br/>
-            <span> Enter numbers only. Special characters will be added automatically</span>
+            <span>Enter numbers only. Special characters will be added automatically</span>
           </label>
           <Cleave
             required
+            minLength="24"
             placeholder="00&#xb0;00&#x2019;00.0&#x201D;N 00&#xb0;00&#x2019;00.0&#x201D;W"
             onChange={onChange} 
-            name="coordonates" 
+            name="coordinates" 
             options={{
               delimiters: ['°', '\'', '.', '"N ', '°', '\'', '.', '"E'],
               blocks: [2, 2, 2, 1, 2, 2, 2, 1, 0],
@@ -85,7 +86,7 @@ const Modal = ({ isOpen, closeModal }) => {
         <div className="form__icons">
           {iconSet.map(i => (
             <label htmlFor={i.name} key={i.name}>
-              <input type="checkbox" id={i.name} name={i.name} onClick={onClick} />
+              <input type="checkbox" id={i.name} name={i.name} onClick={(e) => {dispach({type: e.target.checked, name: e.target.name})}} />
               <Icon name={i.name} />
             </label>
           ))}
