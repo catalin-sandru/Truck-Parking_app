@@ -8,7 +8,7 @@ import Icon from '../icon/icon';
 import iconSet from '../icon/icon-font/facility_icon';
 import { CloseModalAction } from '../../redux/actions/modal.action';
 
-const facilities = [];
+const initFacilities = [];
 
 const onClick = (state, action) => {
   const { name, type } = action
@@ -25,9 +25,18 @@ const onClick = (state, action) => {
 
 const Modal = ({ isOpen, closeModal }) => {
 
-  const [inputValues, setInputValues ] = useState({});
+  const [ inputValues, setInputValues ] = useState({});
   
-  const [ setFacilities, dispach ] = useReducer(onClick, facilities);
+  const [ facilities, setFacilities ] = useReducer(onClick, initFacilities);
+
+  const validate = e => {
+    const { el } = e.target
+    if(el.value.length < el.minLength) {
+      return el.setCustomValidity(el.name + " is too short")
+    } else if(el.value.length > el.maxLength) {
+      return el.setCustomValidity(el.name + "is too long.")
+    }
+  }
 
   const onChange = e => {
     e.preventDefault();
@@ -38,31 +47,30 @@ const Modal = ({ isOpen, closeModal }) => {
     })
   }
 
-  
   const onSubmit = (e) => {
     e.preventDefault();
-    const formValues = {...inputValues, setFacilities};
+    validate(e);
+    const formValues = {...inputValues, facilities};
 
     axios.post('http://localhost:5000' + window.location.pathname, formValues)
       .then(res => {
-        if(res.status = 200) {
-          return closeModal();
-        }
+        console.log(res)
+        return closeModal;
       })
       .catch(err => console.log(err))
   }
 
   return(
     <ModalStyle isOpen={isOpen} >
-      <form action="" onSubmit={onSubmit}>
+      <form onSubmit={onSubmit}>
         <div className="form__button-close">
-          <button onClick={closeModal}>&#10008;</button>
+          <p onClick={closeModal}>&#10008;</p>
         </div>
         <div className="form__title">
           <label htmlFor="title">Add short title</label>
-          <input type="text" id="title" name="title" placeholder="Insert title" onChange={onChange} minLength="3" maxLength="150" required/>
+          <input type="text" id="title" name="title" placeholder="Insert title" onChange={onChange} pattern=".{3,150}" required />
         </div>
-
+        
         <div className="form__coordinates">
           <label htmlFor="coordinates">Add coordinates
           <br/>
@@ -70,7 +78,7 @@ const Modal = ({ isOpen, closeModal }) => {
           </label>
           <Cleave
             required
-            minLength="24"
+            pattern=".{23,26}"
             placeholder="00&#xb0;00&#x2019;00.0&#x201D;N 00&#xb0;00&#x2019;00.0&#x201D;W"
             onChange={onChange} 
             name="coordinates" 
@@ -86,7 +94,8 @@ const Modal = ({ isOpen, closeModal }) => {
         <div className="form__icons">
           {iconSet.map(i => (
             <label htmlFor={i.name} key={i.name}>
-              <input type="checkbox" id={i.name} name={i.name} onClick={(e) => {dispach({type: e.target.checked, name: e.target.name})}} />
+              <p>{i.name}</p>
+              <input type="checkbox" id={i.name} name={i.name} onClick={(e) => {setFacilities({type: e.target.checked, name: e.target.name})}} />
               <Icon name={i.name} />
             </label>
           ))}

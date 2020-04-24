@@ -45,19 +45,41 @@ export const ModalStyle = styled.div`
       input {
         padding: 0.3rem;
       }
+      input:focus {
+        outline: 0;
+      }
+      input:focus:invalid {
+        border: 1px solid red;
+      }
+      input:focus:valid {
+        border: 1px solid green;
+      }
     }
 
     .form__icons {
       display: grid;
-      grid-template-columns: repeat(3, auto);
+      grid-template-columns: repeat(4, 1fr);
       label {
-        margin: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        margin: 0 auto 0 auto;
+      }
+      p {
+        text-transform: capitalize;
+        font-size: 0.6rem;
+        text-align: center;
+        margin: 0.2rem auto;
+        inline-size: min-content;
       }
       img {
         transition: linear 0.3s;
+        max-width: 55px;
+        border-radius: 0.3rem;
       }
       input:checked + img {
-        transform: scale(1.2);
+        transform: scale(1.1);
+        background-color: #95F389;
       }
     }
 
