@@ -45,6 +45,15 @@ export const ModalStyle = styled.div`
       input {
         padding: 0.3rem;
       }
+      input:focus {
+        outline: 0;
+      }
+      input:focus:invalid {
+        border: 1px solid red;
+      }
+      input:focus:valid {
+        border: 1px solid green;
+      }
     }
 
     .form__icons {
