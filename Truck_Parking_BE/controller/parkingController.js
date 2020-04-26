@@ -15,6 +15,29 @@ exports.getAllRegions = async (req, res, next) => {
   }
 }
 
+exports.getAllParking = async (req, res, next) => {
+  const regionId = req.params.id;
+  const region = await Region.findById(regionId);
+  
+  if(!region) {
+    const error = new Error('Region not found');
+    error.statusCode = 404;
+    throw error
+  }
+
+  const getPupulatedRegion = await Region.find({_id: regionId}).populate('parkingItems');
+
+  try {
+    res.status(200).json({
+      message: "Parking fetched successfully",
+      data: getPupulatedRegion[0].parkingItems
+    })
+  } catch(err) {
+    if(!err.statusCode) err.statusCode = 500;
+    next(err)
+  }
+}
+
 exports.addRegion = async (req, res, next) => {
   const name = req.body.name;
   const code = req.body.code;
@@ -38,7 +61,7 @@ exports.addParkingSpot = async (req, res, next) => {
     return res.status(422).json({message: errors})
   }
 
-  const region = await Region.findById(regionId).populate('creator');
+  const region = await Region.findById(regionId);
   if(!region) {
     const error = new Error('Region not found!')
     error.statusCode = 404;
