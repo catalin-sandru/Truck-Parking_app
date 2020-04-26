@@ -7,6 +7,8 @@ const ParkingController = require('../controller/parkingController');
 const router = express.Router();
 
 router.get('/', ParkingController.getAllRegions);
+router.get('/region/:id', ParkingController.getAllParking);
+
 
 router.post('/add-region', ParkingController.addRegion);
 router.post('/region/:id', [

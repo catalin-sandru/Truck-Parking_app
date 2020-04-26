@@ -15,7 +15,10 @@ const regionSchema = new Schema({
     type: String,
     required: true
   },
-  parkingItems: []
+  parkingItems: [{
+    type: Schema.Types.ObjectId,
+    ref: "Parking"
+  }]
 })
 
 module.exports = mongoose.model('Region', regionSchema);

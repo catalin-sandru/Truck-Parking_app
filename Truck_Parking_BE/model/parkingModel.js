@@ -3,11 +3,15 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const ParkingModel = new Schema({
+  _id: {
+    type: Schema.Types.ObjectId,
+    ref: "regions"
+  },
   title: {
     type: String,
     required: true
   },
-  coordonates: {
+  coordinates: {
     type: String,
     required: true
   },
