@@ -16,12 +16,6 @@ const Region = ({ openModal }) => {
   )
 }
 
-
-// const mapStateToProps = state => ({
-//   state: state.ModalReducer
-// })
-
-
 const mapDispachToProps = dispach => ({
   openModal: () => dispach(OpenModalAction())
 })
