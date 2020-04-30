@@ -1,36 +1,32 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { ParkingSpotStyle } from './parkingSpot.style';
-import axios from 'axios';
-import { useEffect } from 'react';
+// import axios from 'axios';
 import Icon from '../icon/icon';
+import { connect } from 'react-redux';
+// import { setRegionDataAction } from '../../redux/actions/parking.action';
 
-const ParkingSpot = () => {
-
-  const [ parking, setParking ] = useState([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const result = await axios.get('http://localhost:5000' + window.location.pathname)
-      setParking(result.data.data)
-    };
-    fetchData();
-  }, [])
-  console.log(parking)
-
-  return(
+const ParkingSpot = ({ id, parkingRegionData, findRegion }) => {
+  const aaa = findRegion(id)
+  return (
     <ParkingSpotStyle>
-      {parking.map(({title, facilities, extra_info, coordinates, _id}) => (
-        <div key={_id}>
-          <h2>{title}</h2>
-          <p>{coordinates}</p>
-          {facilities.map(f => (
-            <Icon name={f}/>
-          ))}
-          <p>{extra_info}</p>
+      {aaa.parkingItems.map(({title, facilities, extra_info, coordinates, _id}) => (
+        <div key={_id} className="parking__spot">
+          <h2 className="parking__spot-title">{title}</h2>
+          <p className="parking__spot-coordinates">{coordinates}</p>
+          <div className="parking__spot-icons">
+            {facilities.map(f => (
+              <Icon key={f} name={f} className="parking__spot-icon"/>
+              ))}
+            </div>
+          <p className="parking__spot-info">{extra_info}</p>
         </div>
       ))}
     </ParkingSpotStyle>
   )
 }
 
-export default ParkingSpot;
+const mapStateToProps = state => ({
+  parkingRegionData: state.ParkingReducer
+})
+
+export default connect(mapStateToProps)(ParkingSpot);

@@ -1,13 +1,15 @@
-import { OpenModal, CloseModal } from '../constants';
+import { OPEN_MODAL, CLOSE_MODAL } from '../constants';
 
 
-export default function(state = false, action) {
+const ModalReducer = (state = false, action) => {
   switch(action.type) {
-    case OpenModal:
+    case OPEN_MODAL:
       return state = true;
-    case CloseModal:
+    case CLOSE_MODAL:
       return state = false;
     default:
         return state
   }
 }
+
+export default ModalReducer
