@@ -6,9 +6,13 @@ const Parking = require('../model/parkingModel');
 exports.getAllRegions = async (req, res, next) => {
   try {
     const regions = await Region.find({});
+    const regionsOnly = regions.map(r => {
+      const {name, _id, code } = r
+      return {name, _id, code}
+    })
     res.status(200).json({
       message: 'Region fetched succesfully',
-      regions
+      regions: regionsOnly
     })
   } catch(err) {
     next(err);
@@ -30,7 +34,7 @@ exports.getAllParking = async (req, res, next) => {
   try {
     res.status(200).json({
       message: "Parking fetched successfully",
-      data: getPupulatedRegion[0].parkingItems
+      data: getPupulatedRegion
     })
   } catch(err) {
     if(!err.statusCode) err.statusCode = 500;
