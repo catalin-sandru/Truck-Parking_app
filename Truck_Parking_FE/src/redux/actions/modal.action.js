@@ -1,9 +1,9 @@
-import { OpenModal, CloseModal } from '../constants'
+import { OPEN_MODAL, CLOSE_MODAL } from '../constants'
 
 export const CloseModalAction = () => ({
-  type: CloseModal
+  type: CLOSE_MODAL
 })
 
 export const OpenModalAction = () => ({
-  type: OpenModal
+  type: OPEN_MODAL
 })

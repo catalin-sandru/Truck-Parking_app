@@ -27,16 +27,7 @@ const Modal = ({ isOpen, closeModal }) => {
 
   const [ inputValues, setInputValues ] = useState({});
   
-  const [ facilities, setFacilities ] = useReducer(onClick, initFacilities);
-
-  const validate = e => {
-    const { el } = e.target
-    if(el.value.length < el.minLength) {
-      return el.setCustomValidity(el.name + " is too short")
-    } else if(el.value.length > el.maxLength) {
-      return el.setCustomValidity(el.name + "is too long.")
-    }
-  }
+  const [ facilities, dispach ] = useReducer(onClick, initFacilities);
 
   const onChange = e => {
     e.preventDefault();
@@ -49,13 +40,11 @@ const Modal = ({ isOpen, closeModal }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    validate(e);
     const formValues = {...inputValues, facilities};
-
     axios.post('http://localhost:5000' + window.location.pathname, formValues)
       .then(res => {
         console.log(res)
-        return closeModal;
+        return closeModal();
       })
       .catch(err => console.log(err))
   }
@@ -95,7 +84,7 @@ const Modal = ({ isOpen, closeModal }) => {
           {iconSet.map(i => (
             <label htmlFor={i.name} key={i.name}>
               <p>{i.name}</p>
-              <input type="checkbox" id={i.name} name={i.name} onClick={(e) => {setFacilities({type: e.target.checked, name: e.target.name})}} />
+              <input type="checkbox" id={i.name} name={i.name} onClick={(e) => {dispach({type: e.target.checked, name: e.target.name})}} />
               <Icon name={i.name} />
             </label>
           ))}

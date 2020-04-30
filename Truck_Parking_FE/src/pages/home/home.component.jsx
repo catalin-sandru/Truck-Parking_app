@@ -1,28 +1,39 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import axios from 'axios';
+import { connect } from 'react-redux';
+
 import { HomeStyle } from './home.style';
 import RegionLink from '../region/RegionLink/regionLink.component';
+import { setRegionsToStateAction } from '../../redux/actions/home.action';
 
-const Home = () => {
-
-  const [ regions, getRegions ] = useState([])
+const Home = ({ regions, setRegionsToState }) => {
 
   useEffect(() => {
-    axios.get('http://localhost:5000')
-      .then(res => getRegions(res.data.regions))
+    if(!regions.length) {
+      axios.get('http://localhost:5000')
+      .then(res => setRegionsToState(res.data.regions))
       .catch(err => console.log(err))
-  }, [])
+    }
+  })
 
   return(
     <HomeStyle>
       <h1 className="page-title">Stop and rest</h1>
       <div className="region-list">
-      {regions.map(r => (
-        <RegionLink name={r.name} id={r._id} key={r._id}/>
-      ))}
+        {regions.map(r => (
+          <RegionLink name={r.name} id={r._id} key={r._id}/>
+        ))}
       </div>
     </HomeStyle>
   )
 }
 
-export default Home;
+const mapStateToProps = state => ({
+  regions: state.HomeReducer
+})
+
+const mapDispachToProps = dispach => ({
+  setRegionsToState: data => dispach(setRegionsToStateAction(data))
+})
+
+export default connect(mapStateToProps, mapDispachToProps)(Home);
