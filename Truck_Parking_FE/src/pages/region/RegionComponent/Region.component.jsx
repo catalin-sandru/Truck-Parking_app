@@ -5,6 +5,7 @@ import axios from 'axios';
 import ParkingSpot from '../../../components/parking_spot/parkingSpot.component';
 import { OpenModalAction } from '../../../redux/actions/modal.action';
 import { setRegionDataAction } from '../../../redux/actions/parking.action';
+import { RegionStyle } from './Region.stye';
 
 
 const Region = ({ openModal, match, addParkingData, setRegionData }) => {
@@ -28,14 +29,14 @@ const Region = ({ openModal, match, addParkingData, setRegionData }) => {
   }, [setRegionData, addParkingData.length, _id, findRegion])
 
   return(
-    <div>
+    <RegionStyle>
       <header>
         <h1>Find your parking spot</h1>
         <button onClick={openModal}>Add New Parking Spot</button>
       </header>
       {!findRegion(_id) && <>Loading...</>}
       {findRegion(_id) && <ParkingSpot id={_id} findRegion={findRegion}/>}
-    </div>
+    </RegionStyle>
   )
 }
 
