@@ -24,7 +24,7 @@ router.post('/region/:id', [
   body('facilities')
     .not()
     .isEmpty()
-    .withMessage('Please select at leat one facility at this spot'),
+    .withMessage('Please select at least one facility at this spot'),
   body('extra_info')
     .trim()
     .isString()
