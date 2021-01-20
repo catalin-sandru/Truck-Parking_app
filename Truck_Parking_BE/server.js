@@ -8,6 +8,7 @@ const mongodb_URI = 'mongodb+srv://parkin_app_admin:Admin1234@cluster0-ct83x.mon
 app.use(express.json());
 
 const ParkingRouter = require('./routes/parkingRoute');
+const AuthRouter = require('./routes/authRoute');
 
 const port = 5000;
 
@@ -19,6 +20,7 @@ app.use((req, res, next) => {
 })
 
 app.use(ParkingRouter);
+app.use(AuthRouter);
 
 app.use((error, req, res, next) => {
   console.log(error);
