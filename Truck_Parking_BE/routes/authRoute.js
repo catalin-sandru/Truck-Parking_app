@@ -14,4 +14,6 @@ router.post('/register', [
     .isLength({ min: 6 })
 ], AuthController.register);
 
+router.post('/login', AuthController.login)
+
 module.exports = router;
