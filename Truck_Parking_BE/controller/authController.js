@@ -15,6 +15,12 @@ exports.register = async (req, res, next) => {
   }
 
   const { email, password } = req.body;
+  const checkEmail = await User.findOne({ email });
+  if(checkEmail) {
+    const error = new Error('This e-mail is already in use.')
+    error.statusCode = 401;
+    throw error
+  }
   try {
     const hassedPassword = await bcrypt.hash(password, 12);
     const user = new User({
