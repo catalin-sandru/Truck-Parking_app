@@ -7,6 +7,8 @@ const { validationResult } = require('express-validator');
 
 exports.register = async (req, res, next) => {
   const errors = validationResult(req);
+  const { email, password } = req.body;
+
   if(!errors.isEmpty()) {
     const error = new Error("Validation failed");
     error.statusCode = 422;
@@ -14,21 +16,27 @@ exports.register = async (req, res, next) => {
     throw error
   }
 
-  const { email, password } = req.body;
   const checkEmail = await User.findOne({ email });
   if(checkEmail) {
-    const error = new Error('This e-mail is already in use.')
-    error.statusCode = 401;
-    throw error
+    return res.status(401).json({message: 'This e-mail is already in use.'})
   }
+
   try {
     const hassedPassword = await bcrypt.hash(password, 12);
     const user = new User({
       email,
       password: hassedPassword
     });
-    await user.save();
-    res.status(201).json({ message: "User created successfully" })
+    await user.save()
+      .then(user => {
+        return res.status(201).json({ message: "User created successfully", userId: user._id.toString()})
+      })
+      .catch(err => {
+        if(!err.statusCode) {
+          err.statusCode = 500;
+        }
+        next(err);
+      });
   } catch (err) {
     if(!err.statusCode) {
       err.statusCode = 500;
