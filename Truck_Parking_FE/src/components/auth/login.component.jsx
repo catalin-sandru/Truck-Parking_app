@@ -4,38 +4,37 @@ import axios from 'axios';
 const Login = () => {
 
   const [ inputValues, setInputValues ] = useState({
-    name: '',
-    code: ''
+    email: '',
+    password: ''
   })
 
   const onChange = (e) => {
     e.preventDefault();
-    console.log(inputValues)
     return setInputValues({...inputValues, [e.target.name] : e.target.value});
   }
 
   const submitForm = (e) => {
     e.preventDefault();
     axios
-      .post('http://localhost:5000/add-region', {
+      .post('http://localhost:5000/login', {
         method: 'POST',
         ...inputValues,
         headers: {
           'Content-Type': 'application/json'
         }
       })
-      .then(data => data)
+      .then(data => console.log(data))
       .catch(err => console.log(err))
   }
 
   return(
     <div>
       <form onSubmit={submitForm}>
-        <label htmlFor="name">Enter Country Name</label>
-        <input type="text" name="name" onChange={onChange}/>
+        <label htmlFor="email">Enter e-mail</label>
+        <input type="email" name="email" onChange={onChange}/>
 
-        <label htmlFor="code">Enter Country Name</label>
-        <input type="text" name="code" onChange={onChange}/>
+        <label htmlFor="password">Enter password</label>
+        <input type="password" name="password" onChange={onChange}/>
 
         <button type="submit">Submit</button>
       </form>
