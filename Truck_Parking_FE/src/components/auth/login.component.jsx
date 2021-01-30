@@ -23,7 +23,17 @@ const Login = () => {
           'Content-Type': 'application/json'
         }
       })
-      .then(data => console.log(data))
+      .then(res => {
+        if(res.status === 422) {
+          throw new Error('Validation failed!')
+        }
+        if(res.status !== 200 && res.status !== 201) {
+          console.log('Error');
+          throw new Error('Could not authenticate you!')
+        }
+        // handle response with token at login
+        return res.json();
+      })
       .catch(err => console.log(err))
   }
 

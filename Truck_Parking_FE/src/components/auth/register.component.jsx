@@ -10,7 +10,6 @@ const Register = () => {
 
   const onChange = e => {
     e.preventDefault();
-    console.log(credentials)
     return setCredentials({...credentials, [e.target.name]: e.target.value })
   }
 
@@ -31,7 +30,10 @@ const Register = () => {
           'Content-Type': 'application/json'
         }
       })
-      .then(data => data)
+      .then(resData => {
+        // do something with response data
+        console.log(resData)
+      })
       .catch(err => console.log(err))
   }
 
@@ -45,8 +47,8 @@ const Register = () => {
         <label htmlFor="password">Password</label>
         <input type="password" name="password" onChange={onChange} required/>
 
-        <label htmlFor="confirm-password">Confirm password</label>
-        <input type="password" name="confirm-password" onChange={onChange} required/>
+        <label htmlFor="confirmPassword">Confirm password</label>
+        <input type="password" name="confirmPassword" onChange={onChange} required/>
 
         <button type="submit" >Submit</button>
       </form>
