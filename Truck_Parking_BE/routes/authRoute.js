@@ -2,12 +2,14 @@ const router = require('express').Router();
 const { body } = require('express-validator');
 
 const AuthController = require('../controller/authController');
+const User = require('../model/authModel')
 
 router.post('/register', [
   body('email')
     .trim()
     .notEmpty()
-    .isEmail(),
+    .isEmail()
+    .normalizeEmail(),
   body('password')
     .trim()
     .notEmpty()
