@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import PopBox from '../pop_box/pop_box.component';
 
 const Register = () => {
   const [ credentials, setCredentials ] = useState({
@@ -8,20 +9,27 @@ const Register = () => {
     confirmPassword: ""
   })
 
+  const [ message, setMessage ] = useState('')
+
   const onChange = e => {
     e.preventDefault();
+    setMessage('')
     return setCredentials({...credentials, [e.target.name]: e.target.value })
   }
 
   const onSubmit = e => {
     e.preventDefault();
     const { email , password, confirmPassword } = credentials;
-    if(password !== confirmPassword && password.length < 4) {
-      return alert('password missmatch')
+    if(password !== confirmPassword) {
+      return setMessage('Password missmatch.')
+    } else if(password.length < 6) {
+      return setMessage('Password must be 6 characters long.')
     }
+    
     const newUser = {
       email, password
     }
+
     axios
       .post('http://localhost:5000/register', {
         method: 'post',
@@ -31,10 +39,12 @@ const Register = () => {
         }
       })
       .then(resData => {
-        // do something with response data
-        console.log(resData)
+        setMessage(resData.data.message);
       })
-      .catch(err => console.log(err))
+      .catch(err => {
+        setMessage(err.response.data.message);
+      }
+      )
   }
 
 
@@ -52,6 +62,8 @@ const Register = () => {
 
         <button type="submit" >Submit</button>
       </form>
+
+      <PopBox message={message} />
     </div>
   )
 }
