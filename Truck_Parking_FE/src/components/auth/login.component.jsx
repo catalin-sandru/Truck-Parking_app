@@ -1,24 +1,34 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { connect } from 'react-redux';
 
-const Login = () => {
+import PopBox from '../pop_box/pop_box.component';
+import { login } from '../../redux/actions/auth.action';
+
+const Login = ({ onSubmit, isAuth }) => {
 
   const [ inputValues, setInputValues ] = useState({
     email: '',
     password: ''
   })
+  const [ message, setMessage ] = useState('');
 
   const onChange = (e) => {
     e.preventDefault();
+    setMessage('')
     return setInputValues({...inputValues, [e.target.name] : e.target.value});
   }
 
   const submitForm = (e) => {
     e.preventDefault();
+    const { email, password } = inputValues;
+    const user = {
+      email, password
+    }
     axios
       .post('http://localhost:5000/login', {
         method: 'POST',
-        ...inputValues,
+        ...user,
         headers: {
           'Content-Type': 'application/json'
         }
@@ -31,10 +41,14 @@ const Login = () => {
           console.log('Error');
           throw new Error('Could not authenticate you!')
         }
-        // handle response with token at login
-        return res.json();
+        setMessage(res.data.message);
+        onSubmit(res.data)
       })
-      .catch(err => console.log(err))
+      .catch(err => {
+        console.log(err)
+        setMessage(err.response.data.message)
+        throw err
+      })
   }
 
   return(
@@ -48,8 +62,17 @@ const Login = () => {
 
         <button type="submit">Submit</button>
       </form>
+
+      <PopBox message={message} />
     </div>
   )
 }
 
-export default Login;
+// const mapStateToProps = state => ({
+//   isAuth: state.AuthReducer.isAuth
+// });
+const mapDispachToProps = dispach => ({
+  onSubmit: data => dispach(login(data))
+})
+
+export default connect(null, mapDispachToProps)(Login);
