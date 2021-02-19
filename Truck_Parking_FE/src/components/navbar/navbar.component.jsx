@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+
 import { NavbarStyle } from './navbar.style';
 import Icon from '../icon/icon';
 
-const Navbar = () => {
-
-  const [isLoggedIn ] = useState(false);
+const Navbar = ({ isLoggedIn }) => {
 
   return (
     <NavbarStyle>
@@ -30,4 +30,8 @@ const Navbar = () => {
   )
 }
 
-export default Navbar;
+const mapStateToProps = state => ({
+  isLoggedIn: state.AuthReducer.isAuth
+})
+
+export default connect(mapStateToProps)(Navbar);
