@@ -79,3 +79,7 @@ exports.login = async (req, res, next) => {
     return err
   }
 }
+
+exports.checkToken = (req, res, next) => {
+  return res.status(201).json({message: 'Token is Valid'})
+}
