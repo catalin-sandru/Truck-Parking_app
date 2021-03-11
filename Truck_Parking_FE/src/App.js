@@ -9,6 +9,7 @@ import Login from './components/auth/login.component';
 import Region from './pages/region/RegionComponent/Region.component';
 import Modal from './components/modal/Modal.component';
 import Register from './components/auth/register.component';
+import ProtectedRoute from './components/protected_route/ProtectedRoutes';
 import { loginAction, logoutAction } from './redux/actions/auth.action';
 
 
@@ -17,7 +18,7 @@ function App({ userIsIn, userIsOut }) {
 
   useEffect(() => {
     if(!token) {
-      return userIsOut;
+      return
     }
     async function checkToken() {
       const sendToken = await fetch('http://localhost:5000/check-token', {
@@ -40,8 +41,8 @@ function App({ userIsIn, userIsOut }) {
       <Navbar />
       <Switch>
         <Route exact path="/" component={Home} />
-        <Route path="/login" component={Login} />
-        <Route path="/register" component={Register} />
+        <ProtectedRoute path="/login" component={Login} />
+        <ProtectedRoute path="/register" component={Register} />
         <Route path="/region/:id" component={Region} />
       </Switch>
       <Modal/>
