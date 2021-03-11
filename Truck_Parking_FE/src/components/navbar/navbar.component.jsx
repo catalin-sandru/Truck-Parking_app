@@ -4,8 +4,9 @@ import { connect } from 'react-redux';
 
 import { NavbarStyle } from './navbar.style';
 import Icon from '../icon/icon';
+import { logoutAction } from '../../redux/actions/auth.action';
 
-const Navbar = ({ isLoggedIn }) => {
+const Navbar = ({ isLoggedIn, logout }) => {
 
   return (
     <NavbarStyle>
@@ -22,7 +23,7 @@ const Navbar = ({ isLoggedIn }) => {
         </li>
         :
         <li className="navbar-list__item">
-          <Link to="/" className="navbar-list__link">Logout</Link>
+          <Link to="/" className="navbar-list__link" onClick={logout} >Logout</Link>
         </li>
         }
       </ul>
@@ -34,4 +35,8 @@ const mapStateToProps = state => ({
   isLoggedIn: state.AuthReducer.isAuth
 })
 
-export default connect(mapStateToProps)(Navbar);
+const mapDispachToProps = dispach => ({
+  logout: () => dispach(logoutAction())
+})
+
+export default connect(mapStateToProps, mapDispachToProps)(Navbar);

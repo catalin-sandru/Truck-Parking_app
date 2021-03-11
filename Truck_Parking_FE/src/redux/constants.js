@@ -3,3 +3,4 @@ export const CLOSE_MODAL = "CLOSE_MODAL";
 export const SET_REGIONS_TO_STATE = "SET_REGIONS_TO_STATE";
 export const SET_DATA = "SET_DATA";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS"
+export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS"
