@@ -3,7 +3,7 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 
 import PopBox from '../pop_box/pop_box.component';
-import { login } from '../../redux/actions/auth.action';
+import { loginAction } from '../../redux/actions/auth.action';
 
 const Login = ({ onSubmit, isAuth }) => {
 
@@ -41,6 +41,7 @@ const Login = ({ onSubmit, isAuth }) => {
           console.log('Error');
           throw new Error('Could not authenticate you!')
         }
+        localStorage.setItem('token', res.data.token)
         setMessage(res.data.message);
         onSubmit(res.data)
       })
@@ -68,11 +69,8 @@ const Login = ({ onSubmit, isAuth }) => {
   )
 }
 
-// const mapStateToProps = state => ({
-//   isAuth: state.AuthReducer.isAuth
-// });
 const mapDispachToProps = dispach => ({
-  onSubmit: data => dispach(login(data))
+  onSubmit: data => dispach(loginAction(data))
 })
 
 export default connect(null, mapDispachToProps)(Login);
