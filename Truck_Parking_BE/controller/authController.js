@@ -7,7 +7,7 @@ const { validationResult } = require('express-validator');
 
 exports.register = async (req, res, next) => {
   const errors = validationResult(req);
-  const { email, password } = req.body;
+  const { email, password, role } = req.body;
 
   if(!errors.isEmpty()) {
     const error = new Error("Validation failed");
@@ -25,11 +25,12 @@ exports.register = async (req, res, next) => {
     const hassedPassword = await bcrypt.hash(password, 12);
     const user = new User({
       email,
-      password: hassedPassword
+      password: hassedPassword,
+      role
     });
     await user.save()
       .then(user => {
-        return res.status(201).json({ message: "User created successfully", userId: user._id.toString()})
+        return res.status(201).json({ message: "User created successfully", userId: user._id.toString(), role: user.role})
       })
       .catch(err => {
         if(!err.statusCode) {
