@@ -10,6 +10,10 @@ const AuthModel = new Schema({
   password: {
     type: String,
     required: true
+  },
+  role: {
+    type: Array,
+    required: true
   }
 })
 module.exports = mongoose.model('User', AuthModel)
