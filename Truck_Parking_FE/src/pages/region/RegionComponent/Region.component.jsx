@@ -8,7 +8,7 @@ import { setRegionDataAction } from '../../../redux/actions/parking.action';
 import { RegionStyle } from './Region.stye';
 
 
-const Region = ({ openModal, match, addParkingData, setRegionData }) => {
+const Region = ({ openModal, match, addParkingData, setRegionData, isAuth }) => {
 
   const _id = match.params.id;
   
@@ -32,7 +32,7 @@ const Region = ({ openModal, match, addParkingData, setRegionData }) => {
     <RegionStyle>
       <header>
         <h1>Find your parking spot</h1>
-        <button onClick={openModal}>Add New Parking Spot</button>
+        {isAuth ? <button onClick={openModal}>Add New Parking Spot</button> : null}
       </header>
       {!findRegion(_id) && <>Loading...</>}
       {findRegion(_id) && <ParkingSpot id={_id} findRegion={findRegion}/>}
@@ -41,7 +41,8 @@ const Region = ({ openModal, match, addParkingData, setRegionData }) => {
 }
 
 const mapStateToProps = state => ({
-  addParkingData: state.ParkingReducer
+  addParkingData: state.ParkingReducer,
+  isAuth: state.AuthReducer.isAuth
 })
 
 const mapDispachToProps = dispach => ({

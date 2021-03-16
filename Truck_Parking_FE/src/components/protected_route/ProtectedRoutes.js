@@ -3,7 +3,6 @@ import { Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 const ProtectedRoute = ({component: Component, isAuth, ...rest}) => {
-  console.log(Component)
   return (
     <Route {...rest} render={props => {
       if(isAuth) return <Redirect to={{ pathname: '/'}} />
