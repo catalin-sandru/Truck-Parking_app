@@ -18,6 +18,6 @@ router.post('/register', [
 
 router.post('/login', AuthController.login)
 
-router.post('/check-token', isAuth, AuthController.checkToken)
+router.get('/check-token', isAuth, AuthController.checkToken)
 
 module.exports = router;

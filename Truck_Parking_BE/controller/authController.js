@@ -23,21 +23,29 @@ exports.register = async (req, res, next) => {
 
   try {
     const hassedPassword = await bcrypt.hash(password, 12);
+
     const user = new User({
       email,
       password: hassedPassword,
       role
     });
-    await user.save()
-      .then(user => {
-        return res.status(201).json({ message: "User created successfully", userId: user._id.toString(), role: user.role})
-      })
-      .catch(err => {
-        if(!err.statusCode) {
-          err.statusCode = 500;
-        }
-        next(err);
-      });
+
+    await user.save();
+
+    const token = jwt.sign({ 
+      email: user.email,
+      userId: user._id.toString(),
+      role
+    }, 'uservalidatorsecretkey', { expiresIn: '1h' });
+
+
+    return res.status(201)
+              .json({ 
+                message: "User created successfully", 
+                userId: user._id.toString(), 
+                role: user.role,
+                token
+              })
   } catch (err) {
     if(!err.statusCode) {
       err.statusCode = 500;
@@ -64,13 +72,15 @@ exports.login = async (req, res, next) => {
 
     const token = jwt.sign({ 
       email: user.email, 
-      userId: user._id.toString()
+      userId: user._id.toString(),
+      role: user.role
     }, 'uservalidatorsecretkey', { expiresIn: '1h' });
 
     res.status(200).json({
       message: 'User logged in successfully',
       user: user._id.toString(),
-      token
+      token,
+      role: user.role
     })
   } catch (err) {
     if(!err.statusCode) {
@@ -82,5 +92,5 @@ exports.login = async (req, res, next) => {
 }
 
 exports.checkToken = (req, res, next) => {
-  return res.status(201).json({message: 'Token is Valid'})
+  return res.status(201).json({message: 'Token is Valid', role: req.role})
 }
