@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import PopBox from '../pop_box/pop_box.component';
+import { connect } from 'react-redux';
+import { loginAction } from '../../redux/actions/auth.action';
 
-const Register = () => {
+const Register = ({ logUserIn }) => {
   const [ credentials, setCredentials ] = useState({
     email: "",
     password: "",
@@ -27,7 +29,9 @@ const Register = () => {
     }
     
     const newUser = {
-      email, password
+      email,
+      password,
+      role: ["user"]
     }
 
     axios
@@ -40,6 +44,8 @@ const Register = () => {
       })
       .then(resData => {
         setMessage(resData.data.message);
+        localStorage.setItem('token', resData.data.token)
+        logUserIn(resData.data)
       })
       .catch(err => {
         setMessage(err.response.data.message);
@@ -68,4 +74,8 @@ const Register = () => {
   )
 }
 
-export default Register;
+const mapDispachToProps = dispach => ({
+  logUserIn: payload => dispach(loginAction(payload))
+})
+
+export default connect(null, mapDispachToProps)(Register);

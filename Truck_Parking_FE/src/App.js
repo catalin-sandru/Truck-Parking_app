@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
+import axios from 'axios'
 
 import './App.css';
 import Navbar from './components/navbar/navbar.component';
@@ -20,20 +21,17 @@ function App({ userIsIn, userIsOut }) {
     if(!token) {
       return
     }
-    async function checkToken() {
-      const sendToken = await fetch('http://localhost:5000/check-token', {
-        method: 'POST',
-        headers: {
-          Authorization: 'Bearer ' + token
-        }
-      })
-      if(sendToken.status === 201) {
-        return userIsIn();
-      } else {
-        return userIsOut()
+    axios.get('http://localhost:5000/check-token', {
+      headers: {
+        Authorization: 'Bearer ' + token
       }
-    }
-    checkToken()
+    }).then(res => {
+      if(res.status === 201) {
+        return userIsIn(res.data);
+      } else {
+        return userIsOut();
+      }
+    })
   }, [token, userIsOut, userIsIn])
 
   return (
@@ -52,7 +50,7 @@ function App({ userIsIn, userIsOut }) {
 
 const mapDispachToProps = dispach => ({
   userIsOut: () => dispach(logoutAction()),
-  userIsIn: () => dispach(loginAction())
+  userIsIn: payload => dispach(loginAction(payload))
 })
 
 export default connect(null, mapDispachToProps)(App);

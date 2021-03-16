@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import PopBox from '../pop_box/pop_box.component';
 import { loginAction } from '../../redux/actions/auth.action';
 
-const Login = ({ onSubmit, isAuth }) => {
+const Login = ({ logUserIn }) => {
 
   const [ inputValues, setInputValues ] = useState({
     email: '',
@@ -41,9 +41,9 @@ const Login = ({ onSubmit, isAuth }) => {
           console.log('Error');
           throw new Error('Could not authenticate you!')
         }
-        localStorage.setItem('token', res.data.token)
+        localStorage.setItem('token', res.data.token);
         setMessage(res.data.message);
-        onSubmit(res.data)
+        logUserIn(res.data);
       })
       .catch(err => {
         console.log(err)
@@ -70,7 +70,7 @@ const Login = ({ onSubmit, isAuth }) => {
 }
 
 const mapDispachToProps = dispach => ({
-  onSubmit: data => dispach(loginAction(data))
+  logUserIn: data => dispach(loginAction(data))
 })
 
 export default connect(null, mapDispachToProps)(Login);
