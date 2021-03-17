@@ -1,14 +1,19 @@
 import styled from 'styled-components';
+import colors from '../../GlobalColors';
 
 export const ParkingSpotStyle = styled.div`
-  .parking__spot {
-    border: 1px solid #000;
-    margin: 0.2rem 0.4rem;
-    padding: 0.5rem;
+
+.parking__spot {
+  border: 1px solid #000;
+  margin: 1rem 0.4rem;
+  padding: 0.5rem;
+  &:nth-child(odd) {
+    background-color: ${colors.cantaloupe}
+  }
 
     .parking__spot-title {
       font-size: 1.1rem;
-      border-bottom: 1px solid #ccc;
+      border-bottom: 1px solid ${colors.mintcream};
     }
 
     .parking__spot-coordinates {
@@ -24,7 +29,7 @@ export const ParkingSpotStyle = styled.div`
       }
     }
     .parking__spot-info {
-      border-top: 1px solid #ccc;
+      border-top: 1px solid ${colors.mintcream};
     }
   }
 `

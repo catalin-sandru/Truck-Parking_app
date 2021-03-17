@@ -2,6 +2,10 @@ import styled from 'styled-components';
 
 export const RegionStyle = styled.div`
   header{
+    h1 {
+      text-align: center;
+    }
+
     button{
       margin: 0.4rem;
       font-size: 1rem;

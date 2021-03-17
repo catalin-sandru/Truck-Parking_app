@@ -2,16 +2,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Route, Redirect } from 'react-router-dom';
 
-const AdminRoute = ({component : Component, user, roles, ...rest})=>{
+const AdminRoute = ({component : Component, user, ...rest})=>{
   console.log(user)
-  const { isAuth, role } = user;
+  const { isAuth } = user;
   return(
       <Route {...rest} render={props =>{
           if(!isAuth)
               return <Redirect to={{ pathname: '/login' }}/>
-          
-          if(!roles.includes(role))
-              return <Redirect to={{ pathname: '/'}}/>
           return <Component {...props}/>
       }}/>
   )
