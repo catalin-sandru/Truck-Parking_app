@@ -2,7 +2,8 @@ import { LOGIN_SUCCESS, LOGOUT_SUCCESS } from "../constants";
 
 const initialState = {
   isAuth: false,
-  role: []
+  role: [],
+  admin: false
 }
 
 const AuthReducer = (state = initialState, action) => {
@@ -11,13 +12,15 @@ const AuthReducer = (state = initialState, action) => {
       const { role } = action.payload;
       return state = {
         isAuth: true,
-        role
+        role,
+        admin: role.includes("admin") ? true : false
       }
     }
     case LOGOUT_SUCCESS: {
       localStorage.removeItem('token');
       return state = {
         isAuth: false,
+        admin: false,
         role: []
       }
     }
