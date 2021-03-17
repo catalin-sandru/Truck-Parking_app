@@ -3,7 +3,7 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 
 import { HomeStyle } from './home.style';
-import RegionLink from '../region/RegionLink/regionLink.component';
+import RegionLink from '../../components/RegionLink/regionLink.component';
 import { setRegionsToStateAction } from '../../redux/actions/home.action';
 
 const Home = ({ regions, setRegionsToState }) => {
@@ -18,7 +18,7 @@ const Home = ({ regions, setRegionsToState }) => {
 
   return(
     <HomeStyle>
-      <h1 className="page-title">Stop and rest</h1>
+      {/* <h3 className="page-title">Select a country to find a place to rest or other amenities</h3> */}
       <div className="region-list">
         {regions.map(r => (
           <RegionLink name={r.name} id={r._id} key={r._id}/>

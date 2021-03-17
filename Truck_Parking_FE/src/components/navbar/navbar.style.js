@@ -1,7 +1,8 @@
 import styled from 'styled-components';
+import colors from '../../GlobalColors';
 
 export const NavbarStyle = styled.div`
-  background: #ccc;
+  background: ${colors.cantaloupe};
 
   .navbar-list {
     display: flex;
@@ -16,6 +17,7 @@ export const NavbarStyle = styled.div`
 
   .navbar-list__link {
     margin: 0.5rem;
+    color: ${colors.armyUniform};
 
     img{
       width: 2.5rem;

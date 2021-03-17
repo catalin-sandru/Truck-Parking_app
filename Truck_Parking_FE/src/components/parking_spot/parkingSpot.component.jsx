@@ -1,9 +1,7 @@
 import React from 'react';
 import { ParkingSpotStyle } from './parkingSpot.style';
-// import axios from 'axios';
 import Icon from '../icon/icon';
 import { connect } from 'react-redux';
-// import { setRegionDataAction } from '../../redux/actions/parking.action';
 
 const ParkingSpot = ({ id, findRegion }) => {
   const aaa = findRegion(id)
@@ -17,7 +15,6 @@ const ParkingSpot = ({ id, findRegion }) => {
             <span> {coordinates}</span>
           </p>
           <div className="parking__spot-icons">
-            <p>Those facilities will be at this place:</p>
             {facilities.map(f => (
               <Icon key={f} name={f} className="parking__spot-icon"/>
               ))}
