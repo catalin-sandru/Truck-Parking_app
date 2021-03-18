@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { Route, Redirect } from 'react-router-dom';
 
 const AdminRoute = ({component : Component, user, ...rest})=>{
-  console.log(user)
   const { isAuth } = user;
   return(
       <Route {...rest} render={props =>{
