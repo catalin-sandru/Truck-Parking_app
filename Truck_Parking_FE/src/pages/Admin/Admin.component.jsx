@@ -23,7 +23,7 @@ export default function AdminPage() {
       name, code
     }
     axios
-      .post('http://localhost:5000/add-region', {
+      .post(process.env.REACT_APP_SERVER_URL + '/add-region', {
         ...region,
         headers: {
           'Content-Type': 'application/json'

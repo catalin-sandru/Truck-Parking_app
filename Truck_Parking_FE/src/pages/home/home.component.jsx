@@ -10,7 +10,7 @@ const Home = ({ regions, setRegionsToState }) => {
 
   useEffect(() => {
     if(!regions.length) {
-      axios.get('http://localhost:5000')
+      axios.get(process.env.REACT_APP_SERVER_URL)
       .then(res => setRegionsToState(res.data.regions))
       .catch(err => console.log(err))
     }

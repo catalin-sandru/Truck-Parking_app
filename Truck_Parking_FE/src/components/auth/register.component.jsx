@@ -37,7 +37,7 @@ const Register = ({ logUserIn }) => {
     }
 
     axios
-      .post('http://localhost:5000/register', {
+      .post(process.env.REACT_APP_SERVER_URL + '/register', {
         method: 'post',
         ...newUser,
         headers: {

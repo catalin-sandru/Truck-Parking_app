@@ -20,7 +20,7 @@ const Region = ({ openModal, match, addParkingData, setRegionData, isAuth }) => 
   useEffect(() => {
     if(!addParkingData.length || !findRegion(_id)) {
       axios
-        .get('http://localhost:5000' + window.location.pathname)
+        .get(window.location.origin + window.location.pathname)
         .then(result => {
           return setRegionData(result.data.data)
         })
