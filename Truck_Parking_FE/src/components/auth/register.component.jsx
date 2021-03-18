@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+
 import PopBox from '../pop_box/pop_box.component';
 import { connect } from 'react-redux';
 import { loginAction } from '../../redux/actions/auth.action';
+import { FormStyle } from './Form.style';
 
 const Register = ({ logUserIn }) => {
   const [ credentials, setCredentials ] = useState({
@@ -55,22 +57,30 @@ const Register = ({ logUserIn }) => {
 
 
   return(
-    <div>
+    <FormStyle>
       <form onSubmit={onSubmit}>
-        <label htmlFor="email">E-mail</label>
-        <input type="email" name="email" onChange={onChange} required/>
+        <div className="form__email">
+          <label htmlFor="email">E-mail</label>
+          <input type="email" name="email" onChange={onChange} required/>
+        </div>
 
-        <label htmlFor="password">Password</label>
-        <input type="password" name="password" onChange={onChange} required/>
+        <div className="form__password">
+          <label htmlFor="password">Password</label>
+          <input type="password" name="password" onChange={onChange} required/>
+        </div>
 
-        <label htmlFor="confirmPassword">Confirm password</label>
-        <input type="password" name="confirmPassword" onChange={onChange} required/>
+        <div className="form__confirm-password">
+          <label htmlFor="confirmPassword">Confirm password</label>
+          <input type="password" name="confirmPassword" onChange={onChange} required/>
+        </div>
 
-        <button type="submit" >Submit</button>
+        <div className="form__submit">
+          <button type="submit" >Submit</button>
+        </div>
       </form>
 
       <PopBox message={message} />
-    </div>
+    </FormStyle>
   )
 }
 
