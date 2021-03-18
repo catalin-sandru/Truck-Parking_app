@@ -41,7 +41,7 @@ const Modal = ({ isOpen, closeModal }) => {
   const onSubmit = (e) => {
     e.preventDefault();
     const formValues = {...inputValues, facilities};
-    axios.post('http://localhost:5000' + window.location.pathname, formValues)
+    axios.post(process.env.REACT_APP_SERVER_URL + window.location.pathname, formValues)
       .then(res => {
         console.log(res)
         return closeModal();

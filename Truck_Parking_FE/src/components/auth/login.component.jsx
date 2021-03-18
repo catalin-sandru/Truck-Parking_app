@@ -27,7 +27,7 @@ const Login = ({ logUserIn }) => {
       email, password
     }
     axios
-      .post('http://localhost:5000/login', {
+      .post(process.env.REACT_APP_SERVER_URL + '/login', {
         method: 'POST',
         ...user,
         headers: {

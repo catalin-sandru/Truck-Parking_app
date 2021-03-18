@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import colors from '../../../GlobalColors';
 
 export const RegionStyle = styled.div`
   header{
@@ -12,10 +13,12 @@ export const RegionStyle = styled.div`
     }
 
     button{
-      margin: 0.4rem;
-      font-size: 1rem;
-      padding: 0.3rem;
-      text-align: center;
+      padding: 0.5rem 1rem;
+      font-size: 1.2rem;
+      margin-left: 0.4rem;
+      color: ${colors.armyUniform};
+      background-color: ${colors.cantaloupe};
+      border-radius: 0.3rem;
     }
   }
 `
