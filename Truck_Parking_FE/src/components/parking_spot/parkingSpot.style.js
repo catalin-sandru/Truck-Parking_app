@@ -18,8 +18,10 @@ export const ParkingSpotStyle = styled.div`
 
     .parking__spot-coordinates {
       img {
-        width: 13px;
+        width: 15px;
       }
+      font-size: 1.2rem;
+      font-weight: 400;
     }
 
     .parking__spot-icons {

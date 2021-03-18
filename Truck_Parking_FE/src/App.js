@@ -34,6 +34,10 @@ function App({ userIsIn, userIsOut }) {
         return userIsOut();
       }
     })
+    .catch(err => {
+      console.log(err)
+      return userIsOut();
+    }) 
   }, [token, userIsOut, userIsIn])
 
   return (

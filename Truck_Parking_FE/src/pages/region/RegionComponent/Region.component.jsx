@@ -32,7 +32,11 @@ const Region = ({ openModal, match, addParkingData, setRegionData, isAuth }) => 
     <RegionStyle>
       <header>
         <h1>Find your parking spot</h1>
-        {isAuth ? <button onClick={openModal}>Add New Parking Spot</button> : null}
+        {isAuth 
+        ? 
+          <button onClick={openModal}>Add New Parking Spot</button> 
+        : 
+        <p>You need to be logged in to add parking spots</p>}
       </header>
       {!findRegion(_id) && <>Loading...</>}
       {findRegion(_id) && <ParkingSpot id={_id} findRegion={findRegion}/>}

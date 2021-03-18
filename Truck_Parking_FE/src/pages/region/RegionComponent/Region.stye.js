@@ -4,6 +4,11 @@ export const RegionStyle = styled.div`
   header{
     h1 {
       text-align: center;
+      margin: 1.5rem 0;
+    }
+
+    p {
+      font-size: 0.8rem;
     }
 
     button{

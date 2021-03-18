@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 import PopBox from '../pop_box/pop_box.component';
 import { loginAction } from '../../redux/actions/auth.action';
+import { FormStyle } from './Form.style';
 
 const Login = ({ logUserIn }) => {
 
@@ -53,19 +54,25 @@ const Login = ({ logUserIn }) => {
   }
 
   return(
-    <div>
+    <FormStyle>
       <form onSubmit={submitForm}>
-        <label htmlFor="email">Enter e-mail</label>
-        <input type="email" name="email" onChange={onChange}/>
+        <div>
+          <label htmlFor="email">Enter e-mail</label>
+          <input type="email" name="email" onChange={onChange}/>
+        </div>
 
-        <label htmlFor="password">Enter password</label>
-        <input type="password" name="password" onChange={onChange}/>
+        <div>
+          <label htmlFor="password">Enter password</label>
+          <input type="password" name="password" onChange={onChange}/>
+        </div>
 
-        <button type="submit">Submit</button>
+        <div className="form__submit" >
+          <button type="submit">Submit</button>
+        </div>
       </form>
 
       <PopBox message={message} />
-    </div>
+    </FormStyle>
   )
 }
 
