@@ -14,6 +14,12 @@ export const HomeStyle = styled.div`
     grid-template-columns: repeat(2, auto);
     grid-gap: 0.5rem;
 
+    @media screen and (min-width: 780px) {
+      grid-template-columns: repeat(4, auto);
+      margin: 2rem 4rem;
+      grid-gap: 1rem;
+    }
+
     .region-list__item {
       border: 3px solid white;
       height: 3rem;
