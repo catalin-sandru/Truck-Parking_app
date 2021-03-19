@@ -2,10 +2,16 @@ import styled from 'styled-components';
 import colors from '../../GlobalColors';
 
 export const ParkingSpotStyle = styled.div`
+@media screen and (min-width: 780px) {
+  display: grid;
+  grid-template-columns: repeat(2, 50%);
+  max-width: 80%;
+  margin: auto;
+}
 
 .parking__spot {
   border: 1px solid #000;
-  margin: 1rem 0.4rem;
+  margin: 0.5rem;
   padding: 0.5rem;
   &:nth-child(odd) {
     background-color: ${colors.cantaloupe}
