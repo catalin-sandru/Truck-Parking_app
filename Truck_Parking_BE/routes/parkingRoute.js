@@ -3,6 +3,7 @@ const { body, check } = require('express-validator');
 
 const regEx = require('../util/regex');
 const ParkingController = require('../controller/parkingController');
+const isAuth = require('../middleware/is-auth');
 
 const router = express.Router();
 
@@ -10,8 +11,8 @@ router.get('/', ParkingController.getAllRegions);
 router.get('/region/:id', ParkingController.getAllParking);
 
 
-router.post('/add-region', ParkingController.addRegion);
-router.post('/region/:id', [
+router.post('/add-region', isAuth ,ParkingController.addRegion);
+router.post('/region/:id', isAuth, [
   body('title')
     .trim()
     .isString()
