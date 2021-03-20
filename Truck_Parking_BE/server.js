@@ -10,7 +10,7 @@ app.use(express.json());
 const ParkingRouter = require('./routes/parkingRoute');
 const AuthRouter = require('./routes/authRoute');
 
-const port = 5000;
+const port = process.env.PORT || 5000;
 
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
