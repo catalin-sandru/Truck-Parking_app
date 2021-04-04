@@ -15,6 +15,7 @@ const Navbar = ({ isLoggedIn, logout, isAdmin }) => {
           <Link to="/" className="navbar-list__link">
             <Icon name="home" /> 
           </Link>
+          <Link to="/about" className="navbar-list__link" >About</Link>
         </li>
         {!isLoggedIn ? 
         <li className="navbar-list__item">

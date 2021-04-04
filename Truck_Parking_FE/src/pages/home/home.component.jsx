@@ -18,7 +18,6 @@ const Home = ({ regions, setRegionsToState }) => {
 
   return(
     <HomeStyle>
-      {/* <h3 className="page-title">Select a country to find a place to rest or other amenities</h3> */}
       <div className="region-list">
         {regions.map(r => (
           <RegionLink name={r.name} id={r._id} key={r._id}/>

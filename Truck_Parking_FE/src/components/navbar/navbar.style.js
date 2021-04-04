@@ -16,7 +16,7 @@ export const NavbarStyle = styled.div`
   }
 
   .navbar-list__link {
-    margin: 0.5rem;
+    margin: auto 0.5rem;
     color: ${colors.armyUniform};
 
     img{

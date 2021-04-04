@@ -14,6 +14,7 @@ import ProtectedRoute from './components/protected_route/ProtectedRoutes';
 import { loginAction, logoutAction } from './redux/actions/auth.action';
 import AdminRoute from './components/protected_route/AdminRoute';
 import AdminPage from './pages/Admin/Admin.component';
+import About from './pages/About/About.component';
 
 
 function App({ userIsIn, userIsOut }) {
@@ -23,7 +24,7 @@ function App({ userIsIn, userIsOut }) {
     if(!token) {
       return
     }
-    axios.get('http://localhost:5000/check-token', {
+    axios.get(process.env.REACT_APP_SERVER_URL + "/check-token", {
       headers: {
         Authorization: 'Bearer ' + token
       }
@@ -49,6 +50,7 @@ function App({ userIsIn, userIsOut }) {
         <ProtectedRoute path="/register" component={Register} />
         <Route path="/region/:id" component={Region} />
         <AdminRoute path="/admin" roles={"admin"} component={AdminPage} />
+        <Route path="/about" component={About} />
       </Switch>
       <Modal/>
     </div>
