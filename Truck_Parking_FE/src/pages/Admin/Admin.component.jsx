@@ -4,6 +4,7 @@ import { FormStyle } from '../../components/auth/Form.style';
 import PopBox from '../../components/pop_box/pop_box.component';
 
 export default function AdminPage() {
+  const token = localStorage.getItem('token')
   const [ inputValues, setInputValues ] = useState({
     name: '',
     code: ''
@@ -26,6 +27,7 @@ export default function AdminPage() {
       .post(process.env.REACT_APP_SERVER_URL + '/add-region', {
         ...region,
         headers: {
+          Authorization: "Bearer " + token,
           'Content-Type': 'application/json'
         }
       })
