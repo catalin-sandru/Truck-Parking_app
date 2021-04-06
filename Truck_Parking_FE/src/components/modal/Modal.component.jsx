@@ -25,6 +25,8 @@ const onClick = (state, action) => {
 
 const Modal = ({ isOpen, closeModal }) => {
 
+  const token = localStorage.getItem('token');
+
   const [ inputValues, setInputValues ] = useState({});
   
   const [ facilities, dispach ] = useReducer(onClick, initFacilities);
@@ -41,7 +43,11 @@ const Modal = ({ isOpen, closeModal }) => {
   const onSubmit = (e) => {
     e.preventDefault();
     const formValues = {...inputValues, facilities};
-    axios.post(process.env.REACT_APP_SERVER_URL + window.location.pathname, formValues)
+    axios.post(process.env.REACT_APP_SERVER_URL + window.location.pathname, formValues, {
+      headers: {
+        Authorization: 'Bearer ' + token
+      }
+      })
       .then(res => {
         console.log(res)
         return closeModal();

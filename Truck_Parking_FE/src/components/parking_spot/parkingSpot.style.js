@@ -34,6 +34,7 @@ export const ParkingSpotStyle = styled.div`
       margin: 0.3rem 0;
       img {
         width: 40px;
+        padding: 0.1rem 0.3rem;
       }
     }
     .parking__spot-info {
